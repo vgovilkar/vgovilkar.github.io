@@ -1,0 +1,19 @@
+body {
+  background: none;
+  min-height: 2000px;
+  padding-top: 0px;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  color: #fff;
+}
+.full {
+  background: url(../images/dark-texture.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }

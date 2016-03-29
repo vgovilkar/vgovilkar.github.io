@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="full" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Welcome to Vaibhav Govilkar's website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">VVG</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="home"><a href="#">Home</a></li>
+            <li id="aboutme"><a href="#">About Me</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+              role="button" aria-haspopup="true" aria-expanded="false">
+                Projects<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Web Applications</li>
+                <li id="sticknshare"><a href="#">SticknShare</a></li>
+                <li id="d2destimator"><a href="#">D2DEstimateor</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Game Development</li>
+                <li id="criticalmass"><a href="#">Critical Mass</a></li>
+                <li id="politicalpinball"><a href="#">Political Pinball</a></li>
+                <li id="gravitybomber"><a href="#">Political Pinball</a></li>
+              </ul>
+            </li>
+            <li id="contact"><a href="#">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div  class="container">
+      <div id="homepage"><br><br><br><br><br><br><br><br><br></div>
+      <div class="row">
+          <img src="images/my_photo.png" class = "center">
+          <h2 class="text-center">Vaibhav Govilkar</h2>
+          <h3 class="text-center">Full Stack Engineer</h3>
+          <h4 class="text-center">Currently Exploring Intelligent Applications and Machine Learning</h3>
+          <br><br><br><br><br>
+      </div>
+
+      <div id="aboutmepage"><br><br><br><br><br><br></div>
+
+      <div class="row">
+          <h3 class="text-center">About Me</h3>
+          <p class="text-center" style= "font-size:large">
+            <b>Current:</b><br>
+            Software Engineer at Expedia, Chicago<br><br>
+            <b>Education:</b><br>
+            MS, Computer Science at UIC<br>
+            BTech+MBA(Dual Degree) at NMIMS, Mumbai<br><br>
+            <b>Past Experience:</b><br>
+            Orbitz Worldwide, Nokia Corporation,<br>
+            Electronic Visualization Lab at UIC<br><br>
+            <b>Learning and Exploring:</b><br>
+            Machine Learning, Deep Learning<br>
+             and Artificial Intelligence<br><br><br>
+            <a class="btn btn-primary btn-lg"
+            href="files/VaibhavGovilkar2PageResume.pdf">Full Resume</a>
+          </p>
+      </div>
+
+      <div id="criticalmasspage"><br><br><br><br><br></div>
+      <h3 class="text-center">Critical Mass</h3>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <p class="text-center" style= "font-size:large">
+            This game was developed by a cross-functional team of 5 (led by me) in Unity3d.
+            It is a first-person-physics-puzzle shooter inspired by portal portal with three different gun types
+            that manupilate physical properties of dynamic objects within the environment. Watch the full playthrough
+            to see all the features
+          </p>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="text-center"><b>Watch Trailer</b></h4>
+          <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/wg6ii9JoShQ" frameborder="0" allowfullscreen>
+          </iframe>
+        </div>
+        <div class="col-md-6">
+          <h4 class="text-center"><b>Watch Full Playthrough</b></h4>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/bV0qwFzOUnk"
+          frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/scrollto.js"></script>
+    <script>
+        $( "li" ).click(function() {
+          var id = $(this).attr('id')
+          if(id) {
+            scroll_to(id + "page")
+          }
+
+        });
+    </script>
+  </body>
+</html>
