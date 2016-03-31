@@ -34,8 +34,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li id="home"><a href="#">Home</a></li>
-            <li id="aboutme"><a href="#">About Me</a></li>
+            <li><a id="menuitem" href="#home">Home</a></li>
+            <li><a id="menuitem" href="#aboutme">About Me</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"
               role="button" aria-haspopup="true" aria-expanded="false">
@@ -43,14 +43,14 @@
               </a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Web Applications</li>
-                <li id="sticknshare"><a href="#">SticknShare</a></li>
-                <li id="d2destimator"><a href="#">D2DEstimateor</a></li>
+                <li><a id="menuitem" href="#sticknshare">SticknShare</a></li>
+                <li><a id="menuitem" href="#d2destimator">D2DEstimateor</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Game Development/Graphics</li>
-                <li id="criticalmass"><a href="#">Critical Mass</a></li>
-                <li id="politicalpinball"><a href="#">Political Pinball</a></li>
-                <li id="gravitybomber"><a href="#">Gravity Bomber</a></li>
-                <li id="railsim"><a href="#">Rail Simulation (Academic Research)</a></li>
+                <li><a id="menuitem" href="#criticalmass">Critical Mass</a></li>
+                <li><a id="menuitem" href="#politicalpinball">Political Pinball</a></li>
+                <li><a id="menuitem" href="#gravitybomber">Gravity Bomber</a></li>
+                <li><a id="menuitem" href="#railsim">Rail Simulation (Academic Research)</a></li>
               </ul>
             </li>
             <li id="contact"><a href="#">Contact</a></li>
@@ -189,7 +189,7 @@
       </p>
 
       <div id="railsimpage"><br><br><br><br><br></div>
-      <h3 class="text-center">Rail Simulation Bomber</h3>
+      <h3 class="text-center">Rail Simulation</h3>
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -227,18 +227,34 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/scrollto.js"></script>
     <script>
-        $( "li" ).click(function() {
-          try {
-            var id = $(this).attr('id')
-            if(id) {
-              scroll_to(id + "page")
-              console.log('done')
-            }
-          } catch(err) {
-            console.log(err)
+        $(document).ready(function() {
+          var ancloc = window.location.hash;
+          if (ancloc=="#" || ancloc=="") {
+            return;
           }
+          scroll_to(ancloc.slice(1) + "page")
+        })
 
-        });
+        $('a').click(function(){
+          var href = $(this).attr('href')
+          var id = $(this).attr('id')
+          if(id=="menuitem") {
+            scroll_to(href.slice(1) + "page")
+          }
+        })
+
+
+        // $( "li" ).click(function() {
+        //     var id = $(this).attr('id')
+        //     var ancloc = window.location.hash;
+        //     console.log(ancloc)
+        //     if(id=="menuitem") {
+        //       scroll_to(ancloc + "page")
+        //       console.log('done')
+        //     }
+        //     console.log(err)
+        //   }
+        // );
     </script>
   </body>
 </html>

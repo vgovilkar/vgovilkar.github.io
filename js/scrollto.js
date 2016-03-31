@@ -6,9 +6,6 @@ var scroll_to = function(eID) {
         var startY = currentYPosition();
         var stopY = elmYPosition(eID);
         var distance = stopY > startY ? stopY - startY : startY - stopY;
-        console.log(distance)
-        console.log(stopY)
-        console.log(startY)
         if (distance < 100) {
             scrollTo(0, stopY);
             return;
