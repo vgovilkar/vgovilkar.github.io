@@ -19,6 +19,7 @@ body {
  }
 
 .box {
+  border-radius: 25px;
   border-style: solid;
-  border-color: white;
+  border-color: #404040;
 }
