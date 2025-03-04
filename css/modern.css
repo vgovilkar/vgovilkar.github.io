@@ -90,18 +90,30 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
+/* Section Headers */
 .section-title {
   font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--bs-body-color);
 }
 
 .section-divider {
-  width: 50px;
-  height: 4px;
+  width: 60px;
+  height: 3px;
   background: var(--bs-primary);
-  margin: 0 auto 2rem;
-  border-radius: 2px;
+  margin: 0 auto 3rem;
+}
+
+/* Project Section Headers */
+#projects .h4.text-muted {
+  color: var(--bs-body-color) !important;
+  opacity: 0.8;
+}
+
+/* Dark theme adjustments */
+.dark-theme .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .text-gradient {
