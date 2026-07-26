@@ -176,6 +176,8 @@ body.light-theme header {
 .hero-badge {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
+  justify-content: flex-start;
   gap: 0.45rem;
   font-size: 0.78rem;
   font-weight: 500;
@@ -186,6 +188,7 @@ body.light-theme header {
   border-radius: 50rem;
   padding: 0.3rem 0.75rem;
   margin-bottom: 1.25rem;
+  margin-left: 0;
 }
 .hero-badge .dot {
   width: 6px; height: 6px; border-radius: 50%;
@@ -475,7 +478,13 @@ footer {
 /* Responsive */
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .hero-content { text-align: left; }
+.hero-content { 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left; 
+  width: 100%;
+}
 }
 
 @media (max-width: 768px) {
