@@ -1,92 +1,110 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize AOS animation library
-  AOS.init({
-    duration: 800,
-    easing: 'ease-in-out',
-    once: true,
-    mirror: false
-  });
-
-  // Handle dropdown hover behavior for desktop
-  const dropdownToggle = document.querySelector('.dropdown-toggle');
-  const dropdown = document.querySelector('.dropdown');
-  
-  // Only apply hover behavior on devices that support hover (desktop)
-  if (window.matchMedia('(min-width: 992px)').matches) {
-    dropdown.addEventListener('mouseenter', function() {
-      this.classList.add('show');
-      this.querySelector('.dropdown-menu').classList.add('show');
-    });
-    
-    dropdown.addEventListener('mouseleave', function() {
-      this.classList.remove('show');
-      this.querySelector('.dropdown-menu').classList.remove('show');
-    });
-    
-    // Prevent click from toggling on desktop
-    dropdownToggle.addEventListener('click', function(e) {
-      if (window.matchMedia('(min-width: 992px)').matches) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        if (href && href !== '#') {
-          window.location.href = href;
-        }
-      }
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
     });
   }
 
-  // Theme switching functionality
-  const themeToggleBtn = document.getElementById('theme-toggle-btn');
-  const themeIcon = themeToggleBtn.querySelector('i');
+  // Set current year in footer
+  const yearEl = document.getElementById('current-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Handle dropdown hover behavior for desktop - safe guards
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdown = document.querySelector('.dropdown');
   
-  // Check for saved theme preference or use default (dark)
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (dropdown && dropdownToggle) {
+    const handleHover = window.matchMedia('(min-width: 992px)').matches;
+    if (handleHover) {
+      dropdown.addEventListener('mouseenter', function() {
+        this.classList.add('show');
+        const menu = this.querySelector('.dropdown-menu');
+        if (menu) menu.classList.add('show');
+      });
+      
+      dropdown.addEventListener('mouseleave', function() {
+        this.classList.remove('show');
+        const menu = this.querySelector('.dropdown-menu');
+        if (menu) menu.classList.remove('show');
+      });
+      
+      dropdownToggle.addEventListener('click', function(e) {
+        if (window.matchMedia('(min-width: 992px)').matches) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          if (href && href !== '#' && href.startsWith('#')) {
+            const target = document.querySelector(href);
+            if (target) {
+              const headerHeight = document.querySelector('header').offsetHeight;
+              const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+              window.scrollTo({
+                top: targetPosition - headerHeight,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      });
+    }
+  }
+
+  // Theme switching functionality - respects system preference
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeIcon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
+  
+  const getSystemTheme = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  const savedTheme = localStorage.getItem('theme') || getSystemTheme();
   document.body.classList.add(savedTheme + '-theme');
   
-  // Update icon based on current theme
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'light') {
+      themeIcon.classList.remove('fa-sun');
+      themeIcon.classList.add('fa-moon');
+    } else {
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    }
+  }
+  
   updateThemeIcon(savedTheme);
   
-  // Theme toggle click handler
-  themeToggleBtn.addEventListener('click', function() {
-    if (document.body.classList.contains('dark-theme')) {
-      document.body.classList.replace('dark-theme', 'light-theme');
-      localStorage.setItem('theme', 'light');
-      updateThemeIcon('light');
-    } else {
-      document.body.classList.replace('light-theme', 'dark-theme');
-      localStorage.setItem('theme', 'dark');
-      updateThemeIcon('dark');
-    }
-  });
-  
-  // Function to update theme icon
-  function updateThemeIcon(theme) {
-    if (theme === 'light') {
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
-    } else {
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    }
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', function() {
+      if (document.body.classList.contains('dark-theme')) {
+        document.body.classList.replace('dark-theme', 'light-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcon('light');
+      } else {
+        document.body.classList.replace('light-theme', 'dark-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcon('dark');
+      }
+    });
   }
   
   // Smooth scrolling for nav links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      if (this.getAttribute('href') !== '#') {
+      const href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      if (href.startsWith('#')) {
         e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
-          // Close mobile menu if open
           const navbarCollapse = document.querySelector('.navbar-collapse');
-          if (navbarCollapse.classList.contains('show')) {
-            navbarCollapse.classList.remove('show');
+          if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = bootstrap ? bootstrap.Collapse.getInstance(navbarCollapse) : null;
+            if (bsCollapse) bsCollapse.hide();
+            else navbarCollapse.classList.remove('show');
           }
-          
-          // Calculate position accounting for fixed header
           const headerHeight = document.querySelector('header').offsetHeight;
           const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-          
           window.scrollTo({
             top: targetPosition - headerHeight,
             behavior: 'smooth'
@@ -96,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Image lazy loading with fade-in effect
-  const images = document.querySelectorAll('img[data-src]');
-  if ('IntersectionObserver' in window) {
+  // Image lazy loading enhancement - also handle native lazy
+  const lazyImages = document.querySelectorAll('img[data-src]');
+  if (lazyImages.length && 'IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -109,30 +127,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+    lazyImages.forEach(img => imageObserver.observe(img));
+  }
 
-    images.forEach(img => imageObserver.observe(img));
-  } else {
-    // Fallback for browsers without IntersectionObserver
-    images.forEach(img => {
-      img.src = img.dataset.src;
-      img.classList.add('loaded');
+  // Back to top button
+  const backToTopButton = document.querySelector('.back-to-top');
+  if (backToTopButton) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTopButton.classList.add('active');
+      else backToTopButton.classList.remove('active');
+    });
+    backToTopButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  // Back to top button functionality
-  const backToTopButton = document.querySelector('.back-to-top');
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      backToTopButton.classList.add('active');
-    } else {
-      backToTopButton.classList.remove('active');
-    }
-  });
-
-  // Initialize lightbox for project images
+  // Initialize lightbox
   if (typeof GLightbox !== 'undefined') {
-    const lightbox = GLightbox({
+    GLightbox({
       selector: '.image-link',
       touchNavigation: true,
       loop: true,
@@ -140,22 +153,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Add active class to nav items based on scroll position
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
+  // Active nav tracking
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   
   function onScroll() {
     let current = '';
-    
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      
-      if (window.scrollY >= (sectionTop - 100)) {
+      if (window.scrollY >= (sectionTop - 120)) {
         current = section.getAttribute('id');
       }
     });
-    
     navLinks.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${current}`) {
@@ -166,43 +175,94 @@ document.addEventListener('DOMContentLoaded', function() {
   
   window.addEventListener('scroll', onScroll);
   
-  // Navbar background change on scroll
+  // Navbar background on scroll
   const header = document.querySelector('header');
+  if (header) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+        header.style.boxShadow = 'var(--box-shadow)';
+      } else {
+        header.style.backgroundColor = 'rgba(18, 18, 18, 0.8)';
+        header.style.boxShadow = 'none';
+      }
+    });
+  }
   
-  window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY;
-    if (scrollPosition > 50) {
-      header.style.backgroundColor = 'var(--dark-bg)';
-      header.style.boxShadow = 'var(--box-shadow)';
-    } else {
-      header.style.backgroundColor = 'rgba(18, 18, 18, 0.8)';
-      header.style.boxShadow = 'none';
-    }
-  });
-  
-  // Form validation
+  // Contact form - validation + mailto fallback (Formspree deprecated email endpoint)
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      // Simple validation
       let valid = true;
       const requiredFields = contactForm.querySelectorAll('[required]');
-      
       requiredFields.forEach(field => {
         if (!field.value.trim()) {
           valid = false;
           field.classList.add('is-invalid');
         } else {
           field.classList.remove('is-invalid');
+          field.classList.add('is-valid');
         }
       });
       
-      if (valid) {
-        // Submit the form
-        contactForm.submit();
+      if (!valid) return;
+
+      const formData = new FormData(contactForm);
+      const name = formData.get('name') || '';
+      const email = formData.get('_replyto') || formData.get('email') || '';
+      const phone = formData.get('tel') || '';
+      const message = formData.get('message') || '';
+
+      // If form action is placeholder or not configured, use mailto
+      const action = contactForm.getAttribute('action') || '';
+      const isPlaceholder = action.includes('YOUR_FORM_ID') || action.includes('formspree.io/vaibhavgovilkar88') || !action || action === '#';
+
+      if (isPlaceholder) {
+        const subject = encodeURIComponent(`Contact from ${name} via portfolio`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
+        window.location.href = `mailto:vaibhavgovilkar88@gmail.com?subject=${subject}&body=${body}`;
+        
+        // Show feedback
+        const btn = contactForm.querySelector('button[type="submit"]');
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-check me-2"></i>Email client opened';
+          btn.disabled = true;
+          setTimeout(() => {
+            btn.innerHTML = original;
+            btn.disabled = false;
+          }, 3000);
+        }
+        return;
       }
+
+      // Otherwise submit to Formspree if configured
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          contactForm.reset();
+          const btn = contactForm.querySelector('button[type="submit"]');
+          if (btn) {
+            btn.innerHTML = '<i class="fas fa-check me-2"></i>Message Sent!';
+            btn.classList.replace('btn-primary', 'btn-success');
+            setTimeout(() => {
+              btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+              btn.classList.replace('btn-success', 'btn-primary');
+            }, 3000);
+          }
+        } else {
+          alert('Oops! There was a problem sending your message. Please email me directly at vaibhavgovilkar88@gmail.com');
+        }
+      }).catch(() => {
+        // fallback to mailto
+        const subject = encodeURIComponent(`Contact from ${name} via portfolio`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
+        window.location.href = `mailto:vaibhavgovilkar88@gmail.com?subject=${subject}&body=${body}`;
+      });
     });
   }
-}); 
+});

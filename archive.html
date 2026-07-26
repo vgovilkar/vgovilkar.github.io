@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Archive of early projects by Vaibhav Govilkar — web apps, game dev, graphics 2008-2015.">
+  <title>Archive — Vaibhav Govilkar</title>
+  <link rel="canonical" href="https://www.vaibhavgovilkar.com/archive.html">
+  <link rel="icon" type="image/jpeg" href="images/my_photo.jpg">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+  <link href="css/modern.css" rel="stylesheet">
+  <style>
+    .archive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+    @media (max-width: 768px) { .archive-grid { grid-template-columns: 1fr; } }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--border-color); }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  </style>
+</head>
+<body class="dark-theme">
+  <header class="fixed-top">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container" style="max-width:1120px;">
+        <a class="navbar-brand" href="index.html">vg</a>
+        <div class="ms-auto d-flex gap-3">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link active" href="archive.html">Archive</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="content-section" style="padding-top: calc(var(--header-height) + 48px); border-top: none;">
+    <div class="section-label">Archive</div>
+    <h1 style="font-size:2rem; font-weight:700; letter-spacing:-0.04em; margin-bottom:0.5rem;">Early work — 2008-2015</h1>
+    <p style="color:var(--text-muted); max-width:60ch;">Side projects from grad school and hackathons. Kept for nostalgia — web apps, Unity games, graphics. My current work is in <a href="index.html#experience" style="text-decoration:underline;">AI platform & agentic systems</a>.</p>
+
+    <div class="archive-grid">
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">SticknShare <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2015</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Angular SPA + Firebase, real-time common pinboard + private boards via Facebook auth.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:0.75rem;">
+          <a href="images/sticknshare_common.jpg" class="image-link"><img src="images/sticknshare_common.jpg" alt="Common" loading="lazy" style="width:100%; border-radius:0.5rem; border:1px solid var(--border-color);"></a>
+          <a href="images/sticknshare_loggedin.jpg" class="image-link"><img src="images/sticknshare_loggedin.jpg" alt="Private" loading="lazy" style="width:100%; border-radius:0.5rem; border:1px solid var(--border-color);"></a>
+        </div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Door2Door Travel Time <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2015</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Angular + Express, Expedia API + Google Maps for fastest door-to-door via airports.</p>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/A2PKL5_w9j8" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Activity Based Hotel Search <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2014</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Angular + Node + SpringBoot, hotels sorted by proximity to activities via Distance Matrix.</p>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/dMRaW-SCYZg" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Critical Mass <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2011</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Unity3D FPS physics puzzle shooter, led 5-person team, Portal-inspired.</p>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/wg6ii9JoShQ" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Political Pinball <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2011</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Unity3D pinball with tilt powerups.</p>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/Udis0N8tqUk" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Gravity Bomber <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2008</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Flash arcade, custom physics, original score.</p>
+        <a href="http://www.newgrounds.com/portal/view/446133" target="_blank" style="font-size:0.85rem; text-decoration:underline;">Play on Newgrounds</a>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/a_tJbIVv_is" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Rail Simulation <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2012</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">UIC EVL CAVE2 VR visualization, C++/OpenGL/GLSL.</p>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/EEAdcnnuq-M" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="card-min">
+        <h3 style="font-size:1rem; font-weight:600;">Ray Tracing & Other Graphics <span style="color:var(--text-muted); font-weight:400; font-size:0.85rem;">2009-2011</span></h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Recursive ray tracer, perspective projections, Infection game concept.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:0.75rem;">
+          <a href="images/raytrace1.jpg" class="image-link"><img src="images/raytrace1.jpg" alt="Raytrace 1" loading="lazy" style="width:100%; border-radius:0.5rem; border:1px solid var(--border-color);"></a>
+          <a href="images/raytrace2.jpg" class="image-link"><img src="images/raytrace2.jpg" alt="Raytrace 2" loading="lazy" style="width:100%; border-radius:0.5rem; border:1px solid var(--border-color);"></a>
+        </div>
+        <div class="video-container mt-2"><iframe src="https://www.youtube.com/embed/GprM_V0tC7Q" loading="lazy" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:3rem;">
+      <a href="index.html" class="archive-callout"><i class="fas fa-arrow-left me-1"></i> Back to home</a>
+    </div>
+  </section>
+
+  <footer style="max-width:768px;">
+    <div style="display:flex; justify-content:space-between;">
+      <span>© <span id="current-year">2026</span> Vaibhav Govilkar</span>
+      <a href="index.html" style="text-decoration:underline;">Home</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script src="js/modern.js"></script>
+</body>
+</html>
