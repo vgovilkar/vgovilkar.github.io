@@ -175,18 +175,25 @@ document.addEventListener('DOMContentLoaded', function() {
   
   window.addEventListener('scroll', onScroll);
   
-  // Navbar background on scroll
+  // Navbar background on scroll - theme aware for light/dark
   const header = document.querySelector('header');
   if (header) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 50) {
-        header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
-        header.style.boxShadow = 'var(--box-shadow)';
+    function updateHeaderBg() {
+      const isLight = document.body.classList.contains('light-theme');
+      const scrolled = window.scrollY > 50;
+      if (isLight) {
+        header.style.backgroundColor = scrolled ? 'rgba(252,252,252,0.92)' : 'rgba(252,252,252,0.75)';
       } else {
-        header.style.backgroundColor = 'rgba(18, 18, 18, 0.8)';
-        header.style.boxShadow = 'none';
+        header.style.backgroundColor = scrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.70)';
       }
-    });
+      header.style.boxShadow = scrolled ? 'var(--box-shadow)' : 'none';
+      header.style.borderBottom = '1px solid var(--border-color)';
+    }
+    window.addEventListener('scroll', updateHeaderBg);
+    // Also update when theme toggles
+    const observer = new MutationObserver(updateHeaderBg);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    updateHeaderBg();
   }
   
   // Contact form - validation + mailto fallback (Formspree deprecated email endpoint)
