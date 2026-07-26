@@ -158,7 +158,19 @@ body.light-theme header {
   margin: 0 auto;
 }
 
-.hero-content { text-align: left; }
+.hero-content { 
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  text-align: left !important; 
+  width: 100% !important;
+}
+.hero-content > * {
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
 
 .profile-image-container {
   width: 92px;
